@@ -2,7 +2,7 @@
 
 int main ()
 {
-    Server server(9984, "Log.txt");
+    Server server;
     server.startListening();
     return 0;
 }

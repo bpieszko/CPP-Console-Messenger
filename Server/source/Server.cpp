@@ -6,10 +6,9 @@
  * @Args:
  *      port - number of port to listening
  */
-Server::Server(const size_t port, const std::string & log_file)
-    : m_acceptor(m_io_service, tcp::endpoint(tcp::v4(), port)),
-      m_resolver(new Resolver()),
-      m_logger(new Logger(log_file))
+Server::Server()
+    : m_acceptor(m_io_service, tcp::endpoint(tcp::v4(), PORT)),
+      m_resolver(new Resolver())
 {
     
 }
@@ -48,7 +47,7 @@ void Server::write(tcp::socket & socket, const std::string & message)
  */
 void Server::startListening()
 {
-    m_logger->write("Listening started.");
+    Logger::write("Listening started.");
 
     while (true)
     {
@@ -59,7 +58,7 @@ void Server::startListening()
         t.detach();
     }
     
-    m_logger->write("Listening stopped.");
+    Logger::write("Listening stopped.");
 }
 
 /*
@@ -70,22 +69,22 @@ void Server::startListening()
  */
 void Server::handleConnection(tcp::socket socket)
 {
-    m_logger->write("Opening connection to: " + socket.remote_endpoint().address().to_string() + ".");
+    Logger::write("Opening connection to: " + socket.remote_endpoint().address().to_string() + ".");
 
     try
     {
         Request request(read(socket));
         
-        m_logger->write("Handling request '" + request.getType() + "' from " + socket.remote_endpoint().address().to_string());
+        Logger::write("Handling request '" + request.getType() + "' from " + socket.remote_endpoint().address().to_string());
         m_resolver->resolve(socket, request);
-        m_logger->write("Request '" + request.getType() + "' from " + socket.remote_endpoint().address().to_string() + " handled correctly.");
+        Logger::write("Request '" + request.getType() + "' from " + socket.remote_endpoint().address().to_string() + " handled correctly.");
     }
     catch (std::exception & e)
     {
-        m_logger->write("Exception catched: " + std::string(e.what()));
+        Logger::write("Exception catched: " + std::string(e.what()));
     }
 
-    m_logger->write("Closing connection to: " + socket.remote_endpoint().address().to_string() + ".");
+    Logger::write("Closing connection to: " + socket.remote_endpoint().address().to_string() + ".");
     
     socket.close();
 }

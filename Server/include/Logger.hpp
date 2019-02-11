@@ -12,14 +12,12 @@ class Logger
 {
 public:
     Logger() = delete;
-    Logger(const std::string & log_file);
 
-    void write(const std::string & message);
+    static void write(const std::string & message);
     
 private:
-    const std::string getTime() const;
-    const std::string decorate(const std::string & message) const;
+    static const std::string getTime();
+    static const std::string decorate(const std::string & message);
 
-    const std::string m_log_file;
-    std::mutex m_file_mutex;
+    static std::mutex m_file_mutex;
 };

@@ -7,6 +7,7 @@
 #include "Request.hpp"
 #include "Resolver.hpp"
 #include "Logger.hpp"
+#include "Config.hpp"
 
 using namespace boost::asio;
 using ip::tcp;
@@ -14,8 +15,7 @@ using ip::tcp;
 class Server
 {
 public:
-    Server() = delete;
-    Server(const size_t port, const std::string & log_file);
+    Server();
     void startListening();
 
 private:
@@ -27,5 +27,4 @@ private:
     boost::asio::io_service m_io_service;
     tcp::acceptor m_acceptor;
     std::unique_ptr<Resolver> m_resolver;
-    std::unique_ptr<Logger> m_logger;
 };

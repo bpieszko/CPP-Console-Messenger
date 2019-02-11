@@ -1,11 +1,5 @@
 #include "Logger.hpp"
 
-Logger::Logger(const std::string & log_file)
-    : m_log_file(log_file)
-{
-
-}
-
 void Logger::write(const std::string & message)
 {
     std::string out_msg = decorate(message);
@@ -18,12 +12,12 @@ void Logger::write(const std::string & message)
     out << out_msg << std::endl;
 }
 
-const std::string Logger::decorate(const std::string & message) const
+const std::string Logger::decorate(const std::string & message)
 {
     return "[" + getTime() + "] " + message;
 }
 
-const std::string Logger::getTime() const
+const std::string Logger::getTime()
 {
     auto now = std::chrono::system_clock::now();
     auto in_time_t = std::chrono::system_clock::to_time_t(now);
