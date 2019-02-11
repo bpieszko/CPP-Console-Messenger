@@ -1,5 +1,7 @@
 #include "Logger.hpp"
 
+std::mutex Logger::m_file_mutex;
+
 void Logger::write(const std::string & message)
 {
     std::string out_msg = decorate(message);

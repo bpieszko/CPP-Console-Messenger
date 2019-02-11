@@ -15,4 +15,4 @@ file(GLOB SOURCES source/*.cpp)
 
 add_executable(Server ${SOURCES})
 target_include_directories(Server PRIVATE ${Boost_INCLUDE_DIRS})
-target_link_libraries(Server ${CMAKE_THREAD_LIBS_INIT} ${Boost_LIBRARIES})
+target_link_libraries(Server ${CMAKE_THREAD_LIBS_INIT} ${Boost_LIBRARIES} mysqlclient)
