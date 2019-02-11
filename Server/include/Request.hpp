@@ -4,13 +4,14 @@
 #include <string>
 #include <iostream>
 #include <sstream>
-#include <boost/algorithm/string.hpp>
+#include <vector>
+#include <boost/asio.hpp>
 
-class Message
+class Request
 {
 public:
-    Message() = default;
-    Message(const std::string & message);
+    Request() = default;
+    Request(const std::string & message);
 
     const std::string & getType() const;
     const std::string & getMessage() const;
@@ -23,4 +24,15 @@ private:
     std::string m_type;
     std::string m_message;
     std::map<std::string, std::string> m_variables;
+};
+
+class RequestException : public std::exception
+{
+public:
+    explicit RequestException(const std::string & message);
+    virtual const char * what() const throw() {
+        return m_message.c_str();
+    }
+private:
+    std::string m_message;
 };

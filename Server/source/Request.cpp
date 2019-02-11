@@ -1,6 +1,6 @@
-#include "Message.hpp"
+#include "Request.hpp"
 
-Message::Message(const std::string & message)
+Request::Request(const std::string & message)
 {
     std::istringstream iss(message);
     std::getline(iss, m_type);
@@ -16,7 +16,7 @@ Message::Message(const std::string & message)
     }
 }
 
-void Message::parseVars(const std::string & vars)
+void Request::parseVars(const std::string & vars)
 {
     std::vector<std::string> results = splitString(vars, '&');
 
@@ -25,34 +25,34 @@ void Message::parseVars(const std::string & vars)
         std::vector<std::string> pair = splitString(vars, '=');
         
         if (pair.size() != 2)
-            throw "Cannot read variables.";
+            throw RequestException("Wrong request. Pair is not complete in request.");
         
         if (m_variables.find(pair[0]) != m_variables.end())
-            throw "The same key in one response.";
+            throw RequestException("Wrong request. Pair is already in structure.");
 
         m_variables.insert({pair[0], pair[1]});
     }
 }
 
-const std::string & Message::getType() const
+const std::string & Request::getType() const
 {
     return m_type;
 }
 
-const std::string & Message::getMessage() const
+const std::string & Request::getMessage() const
 {
     return m_message;
 }
 
-const std::string & Message::getVar(const std::string & key) const
+const std::string & Request::getVar(const std::string & key) const
 {
     if (m_variables.find(key) == m_variables.end())
-        throw "Key is not in message data strucure.";
+        throw RequestException("Key is not in request data strucure.");
 
     return m_variables.at(key);
 }
 
-std::vector<std::string> Message::splitString(const std::string & str, const char delimiter) const
+std::vector<std::string> Request::splitString(const std::string & str, const char delimiter) const
 {
     std::istringstream iss(str);
     std::vector<std::string> result;
@@ -62,4 +62,10 @@ std::vector<std::string> Message::splitString(const std::string & str, const cha
         result.push_back(token);
     }
     return result;
+}
+
+RequestException::RequestException(const std::string & message)
+    : m_message(message)
+{
+    
 }

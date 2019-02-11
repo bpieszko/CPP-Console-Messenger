@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.13.3)
-project(proj)
+project(Server)
 
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -13,6 +13,6 @@ link_directories(${Boost_LIBRARY_DIRS})
 
 file(GLOB SOURCES source/*.cpp)
 
-add_executable(proj ${SOURCES})
-target_include_directories(proj PRIVATE ${Boost_INCLUDE_DIRS})
-target_link_libraries(proj ${CMAKE_THREAD_LIBS_INIT} ${Boost_LIBRARIES})
+add_executable(Server ${SOURCES})
+target_include_directories(Server PRIVATE ${Boost_INCLUDE_DIRS})
+target_link_libraries(Server ${CMAKE_THREAD_LIBS_INIT} ${Boost_LIBRARIES})
