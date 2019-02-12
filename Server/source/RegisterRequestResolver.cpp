@@ -11,14 +11,14 @@ bool RegisterRequestResolver::resolve(tcp::socket & socket, const Request & requ
     if (request.getType() != m_type)
         return false;
 
-    if (isUserExists(request.getVar("login")))
-    {
-        write(socket, "warning message\nLogin is already in use.");
-        return true;
-    }
-
     try
     {
+        if (isUserExists(request.getVar("login")))
+        {
+            write(socket, "warning message\nLogin is already in use.");
+            return true;
+        }
+        
         registerUser(request.getVar("login"), request.getVar("password"));
         write(socket, "message\nUser registered correctly.");
     }
