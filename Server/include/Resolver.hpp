@@ -8,6 +8,7 @@
 
 #include "HelloWorldRequestResolver.hpp"
 #include "RegisterRequestResolver.hpp"
+#include "LoginRequestResolver.hpp"
 
 using namespace boost::asio;
 using ip::tcp;

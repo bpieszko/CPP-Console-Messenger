@@ -42,5 +42,5 @@ bool RegisterRequestResolver::isUserExists(const std::string & login) const
 
 void RegisterRequestResolver::registerUser(const std::string & login, const std::string & password) const
 {
-    SQLResult result = Database::doQuery("INSERT INTO users (login, password) VALUES (\'" + login + "\', \'" + password + "\')");
+    SQLResult result = Database::doQuery("INSERT INTO users (login, password, online) VALUES (\'" + login + "\', \'" + password + "\', 0)");
 }
