@@ -6,6 +6,7 @@
 #include <sstream>
 #include <vector>
 #include <boost/asio.hpp>
+#include "Logger.hpp"
 
 class Request
 {

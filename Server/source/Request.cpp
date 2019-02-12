@@ -20,10 +20,10 @@ void Request::parseVars(const std::string & vars)
 {
     std::vector<std::string> results = splitString(vars, '&');
 
-    for (auto & i : vars)
+    for (auto & i : results)
     {
-        std::vector<std::string> pair = splitString(vars, '=');
-        
+        std::vector<std::string> pair = splitString(i, '=');
+
         if (pair.size() != 2)
             throw RequestException("Wrong request. Pair is not complete in request.");
         

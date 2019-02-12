@@ -3,6 +3,7 @@
 Resolver::Resolver()
 {
     m_chain.push_back(std::unique_ptr<HelloWorldRequestResolver>(new HelloWorldRequestResolver("hello world")));
+    m_chain.push_back(std::unique_ptr<RegisterRequestResolver>(new RegisterRequestResolver("register")));
 }
 
 bool Resolver::resolve(tcp::socket & socket, const Request & request)

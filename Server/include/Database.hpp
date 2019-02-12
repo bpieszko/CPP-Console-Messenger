@@ -4,6 +4,7 @@
 #include <string>
 #include <mysql/mysql.h>
 #include "Config.hpp"
+#include "Logger.hpp"
 
 using SQLResult = std::vector<std::vector<std::string>>;
 
@@ -13,9 +14,6 @@ public:
     Database() = delete;
     
     static SQLResult doQuery(const std::string & query);
-
-private:
-    
 };
 
 class DatabaseException : public std::exception
