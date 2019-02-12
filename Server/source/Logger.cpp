@@ -2,6 +2,13 @@
 
 std::mutex Logger::m_file_mutex;
 
+/*
+ *  @Brief:
+ *      Method to writing message to log file
+ *      and on standard output.
+ *  @Args:
+ *      message - reference to message
+ */
 void Logger::write(const std::string & message)
 {
     std::string out_msg = decorate(message);
@@ -14,11 +21,25 @@ void Logger::write(const std::string & message)
     out << out_msg << std::endl;
 }
 
+/*
+ *  @Brief:
+ *      Decorator to message
+ *  @Args:
+ *      message
+ *  @Return:
+ *      Decorated message
+ */
 const std::string Logger::decorate(const std::string & message)
 {
     return "[" + getTime() + "] " + message;
 }
 
+/*
+ *  @Brief:
+ *      Getter to actual time.
+ *  @Return:
+ *      Time in string in RRRR-MM-DD HH-mm-SS format.
+ */
 const std::string Logger::getTime()
 {
     auto now = std::chrono::system_clock::now();

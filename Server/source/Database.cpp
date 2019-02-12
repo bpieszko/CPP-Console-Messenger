@@ -1,5 +1,14 @@
 #include "Database.hpp"
 
+/*
+ *  @Brief:
+ *      Performs query on database.
+ *  @Args:
+ *      query - query to perform on database
+ *  @Return:
+ *      Result from database in SQLResult format
+ *      defined in Database.hpp.
+ */
 SQLResult Database::doQuery(const std::string & query)
 {
     SQLResult result;

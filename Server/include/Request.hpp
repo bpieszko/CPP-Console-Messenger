@@ -30,7 +30,8 @@ private:
 class RequestException : public std::exception
 {
 public:
-    explicit RequestException(const std::string & message);
+    explicit RequestException(const std::string & message) 
+        : m_message(message) {}
     virtual const char * what() const throw() {
         return m_message.c_str();
     }

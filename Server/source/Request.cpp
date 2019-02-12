@@ -1,5 +1,11 @@
 #include "Request.hpp"
 
+/*
+ *  @Brief:
+ *      Constructor.
+ *  @Args:
+ *      message - request from client in string 
+ */
 Request::Request(const std::string & message)
 {
     std::istringstream iss(message);
@@ -16,6 +22,13 @@ Request::Request(const std::string & message)
     }
 }
 
+/*
+ *  @Brief:
+ *      Initializing m_variables with parameters
+ *      initialized by client in request.
+ *  @Args:
+ *      vars - part of request with variables
+ */
 void Request::parseVars(const std::string & vars)
 {
     std::vector<std::string> results = splitString(vars, '&');
@@ -34,16 +47,32 @@ void Request::parseVars(const std::string & vars)
     }
 }
 
+/*
+ *  @Brief:
+ *      Getter to m_type.
+ */
 const std::string & Request::getType() const
 {
     return m_type;
 }
 
+/*
+ *  @Brief:
+ *      Getter to m_message.
+ */
 const std::string & Request::getMessage() const
 {
     return m_message;
 }
 
+/*
+ *  @Brief:
+ *      Returns value of key in request.
+ *  @Args:
+ *      key - reference to key
+ *  @Return:
+ *      const reference to value of key
+ */
 const std::string & Request::getVar(const std::string & key) const
 {
     if (m_variables.find(key) == m_variables.end())
@@ -52,6 +81,15 @@ const std::string & Request::getVar(const std::string & key) const
     return m_variables.at(key);
 }
 
+/*
+ *  @Brief:
+ *      Method to splitting string.
+ *  @Args:
+ *      str - string to split
+ *      delimiter - delimiter
+ *  @Return:
+ *      Splitted string in std::vector.
+ */
 std::vector<std::string> Request::splitString(const std::string & str, const char delimiter) const
 {
     std::istringstream iss(str);
@@ -62,10 +100,4 @@ std::vector<std::string> Request::splitString(const std::string & str, const cha
         result.push_back(token);
     }
     return result;
-}
-
-RequestException::RequestException(const std::string & message)
-    : m_message(message)
-{
-    
 }

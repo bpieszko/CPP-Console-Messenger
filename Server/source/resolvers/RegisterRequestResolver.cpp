@@ -1,11 +1,27 @@
 #include "RegisterRequestResolver.hpp"
 
+/*
+ *  @Brief:
+ *      Constuctor initializing type of resolver (should be unique).
+ *  @Args:
+ *      type - type of resolver
+ */
 RegisterRequestResolver::RegisterRequestResolver(const std::string & type)
     : RequestResolverAbstract(type)
 {
 
 }
 
+/*
+ *  @Brief:
+ *      Method to resolve request if it is
+ *      possible by this class (chain of responsibility).
+ *  @Args:
+ *      socket
+ *      request
+ *  @Return:
+ *      True if request was resolved by this class, false otherwise.
+ */
 bool RegisterRequestResolver::resolve(tcp::socket & socket, const Request & request)
 {
     if (request.getType() != m_type)
@@ -30,6 +46,14 @@ bool RegisterRequestResolver::resolve(tcp::socket & socket, const Request & requ
     return true;
 }
 
+/*
+ *  @Brief:
+ *      Method to check if user exists in database.
+ *  @Args:
+ *      login - user's login to check
+ *  @Return:
+ *      True if it is exists in database, false otherwise.
+ */
 bool RegisterRequestResolver::isUserExists(const std::string & login) const
 {
     SQLResult result = Database::doQuery("SELECT 1 FROM users WHERE login = \'" + login + "\'");
@@ -40,6 +64,13 @@ bool RegisterRequestResolver::isUserExists(const std::string & login) const
     return false;
 }
 
+/*
+ *  @Brief:
+ *      Method to perform sign up operation in database.
+ *  @Args:
+ *      login - user's login to sign up
+ *      password - user's password to sign up
+ */
 void RegisterRequestResolver::registerUser(const std::string & login, const std::string & password) const
 {
     SQLResult result = Database::doQuery("INSERT INTO users (login, password, online) VALUES (\'" + login + "\', \'" + password + "\', 0)");
