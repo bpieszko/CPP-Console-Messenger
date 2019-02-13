@@ -13,3 +13,8 @@ bool Resolver::resolve(const Command & cmd)
 
     return false;
 }
+
+const std::list<std::unique_ptr<CommandResolverAbstract>> & Resolver::getCommands() const
+{
+    return m_chain;
+}

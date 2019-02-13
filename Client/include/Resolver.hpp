@@ -16,6 +16,7 @@ public:
     Resolver();
 
     bool resolve(const Command & cmd);
+    const std::list<std::unique_ptr<CommandResolverAbstract>> & getCommands() const;
 
 private:
     std::list<std::unique_ptr<CommandResolverAbstract>> m_chain;

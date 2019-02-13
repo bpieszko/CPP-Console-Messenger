@@ -1,7 +1,7 @@
 #include "Client.hpp"
 
 Client::Client()
-    : m_resolver()
+    : m_resolver(new Resolver())
 {
 
 }
@@ -61,7 +61,7 @@ void Client::showMenu() const
 {
     showMessage(NORMAL, "Client started.");
     showMessage(NORMAL, "Commands:");
-    for (auto i : m_resolver.getCommands())
+    for (const auto & i : m_resolver->getCommands())
     {
         showMessage(NORMAL, i->getMenu());
     }

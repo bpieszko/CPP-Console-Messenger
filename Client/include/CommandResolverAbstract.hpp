@@ -14,6 +14,7 @@ public:
     CommandResolverAbstract(const std::string & type)
         : m_type(type) {}
     virtual bool resolve(const Command & command) = 0;
+    virtual const std::string getMenu() = 0;
 
 protected:
     const std::string m_type;
