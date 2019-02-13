@@ -13,7 +13,7 @@ Command::Command(const std::string & message)
         m_args.push_back(msg_v.at(i));
 }
 
-const std::string & Command::toString() const
+const std::string Command::toString() const
 {
     std::string result = m_type;
 
@@ -23,7 +23,7 @@ const std::string & Command::toString() const
     return result;
 }
 
-const std::vector<std::string> & Command::splitString(const std::string & str) const
+const std::vector<std::string> Command::splitString(const std::string & str) const
 {
     std::istringstream iss(str);
     std::vector<std::string> result(

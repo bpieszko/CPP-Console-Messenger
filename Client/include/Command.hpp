@@ -13,10 +13,10 @@ public:
     Command() = delete;
     Command(const std::string & message);
 
-    const std::string & toString() const;
+    const std::string toString() const;
 
 private:
-    const std::vector<std::string> & splitString(const std::string & str) const;
+    const std::vector<std::string> splitString(const std::string & str) const;
     
     std::string m_type;
     std::vector<std::string> m_args;
